@@ -9,11 +9,12 @@
 <!--    <link th:href="@{/styles.css}" rel="stylesheet" />-->
 </head>
 <body>
-
-<nav th:fragment="navigation">
+<nav th:fragment = "navigation">
+    <h1 th:text = "${title}"></h1>
     <ul class="nav">
         <li class="nav-item"><a class="nav-link" href="/events">All Events</a></li>
         <li class="nav-item"><a class="nav-link" href="/events/create">Create Event</a></li>
+        <li class="nav-item"><a class="nav-link" href="/events/delete">Delete Event(s)</a></li>
     </ul>
 </nav>
 
