@@ -1,11 +1,14 @@
 package org.launchcode.codingevents.controllers;
 
+import org.apache.tomcat.util.modeler.BaseAttributeFilter;
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,16 +23,21 @@ public class EventController {
         return "events/index";
     }
 
-    @GetMapping("create") // located at /events/create
+    @GetMapping("create")
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title","Create Event");
-        return "events/create"; // do not put file extension
+        model.addAttribute("event", new Event());
+        return "events/create";
     }
 
-    @PostMapping("create") // located at /events/create
-    public String processCreateEventForm(@ModelAttribute Event newEvent) { // model binding
+    @PostMapping("create")
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
+        if(errors.hasErrors()) {
+            model.addAttribute("title", "All Events");
+            return "events/create";
+        }
         EventData.add(newEvent);
-        return "redirect:";
+        return"redirect:";
     }
 
     @GetMapping("delete")
@@ -46,7 +54,6 @@ public class EventController {
                 EventData.remove(id);
             }
         }
-
         return "redirect:";
     }
 
@@ -59,10 +66,12 @@ public class EventController {
     }
 
     @PostMapping("edit")
-    public String processEditForm(int eventId, String name, String description) {
+    public String processEditForm(int eventId, String name, String description, String contactEmail, String location) {
         Event eventToEdit = EventData.getById(eventId);
         eventToEdit.setName(name);
         eventToEdit.setDescription(description);
+        eventToEdit.setContactEmail(contactEmail);
+        eventToEdit.setLocation(location);
         return "redirect:";
     }
 

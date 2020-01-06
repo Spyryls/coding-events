@@ -6,25 +6,31 @@
 
     <nav th:replace="fragments :: navigation"></nav>
 
-
-
         <table class="table table-striped">
+
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <th> </th>
+                    <th>Contact Email</th>
+                    <th>Location</th>
+
                 </tr>
             </thead>
+
             <tr th:each="event : ${events}">
                 <td th:text = "${event.id}"></td>
                 <td th:text = "${event.name}"></td>
                 <td th:text = "${event.description}"></td>
+                <td th:text = "${event.contactEmail}"></td>
+                <td th:text = "${event.location}"></td>
+                <td></td>
                 <td>
                     <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
                 </td>
             </tr>
+
         </table>
 
     <p th:unless="${events} and ${events.size()}" style="color: grey;">No events! Click 'Create Event' to add a new event.</p>
