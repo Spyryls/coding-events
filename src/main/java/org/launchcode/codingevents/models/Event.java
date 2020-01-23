@@ -28,13 +28,11 @@ public class Event {
         this.description = description;
         this.contactEmail = contactEmail;
         this.location = location;
-
-    }
-
-    public Event() {
         this.id = nextId;
         nextId++;
     }
+
+    public Event() {}
 
     public String getName() {
         return name;
