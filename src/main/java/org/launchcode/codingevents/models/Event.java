@@ -10,8 +10,8 @@ public class Event {
     private int id;
     private static int nextId = 1;
 
-    @NotBlank
-    @Size(min = 3, max = 20, message = "Name must be between 3 and 20 characters.")
+    @NotBlank(message = "This field may not be blank.")
+    @Size(min = 3, max = 50, message =  "Your name must be between 3 and 50 characters.")
     private String name;
 
     @Size(max = 500, message = "Description has too many characters.")
@@ -23,11 +23,14 @@ public class Event {
     @NotBlank(message = "No location mentioned. Please include the location of the event.")
     private String location;
 
-    public Event(String name, String description, String contactEmail, String location) {
+    private EventType type;
+
+    public Event(String name, String description, String contactEmail, String location, EventType type,) {
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.location = location;
+        this.type = type;
         this.id = nextId;
         nextId++;
     }
@@ -55,13 +58,13 @@ public class Event {
         this.contactEmail = contactEmail;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
+    public String getLocation() { return location; }
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public EventType getType() { return type; }
+    public void setType(EventType type) { this.type = type; }
 
     public int getId() {
         return id;

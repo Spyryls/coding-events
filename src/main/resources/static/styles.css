@@ -1,4 +1,26 @@
 body {
-    font-size: 18px;
-    color: purple;
+    background-image: url("https://ak6.picdn.net/shutterstock/videos/1424656/thumb/1.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    font-size: 14px;
+}
+
+.error {
+    color: red;
+}
+
+nav {
+    background-color: black
+    opacity: .5;
+    color: white;
+    padding: 10px;
+}
+
+label {
+    color: #818181;
+}
+
+tr {
+    color: #818181;
 }

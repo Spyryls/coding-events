@@ -11,10 +11,11 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Contact Email</th>
-                    <th>Location</th>
+                    <th>REFERENCE NAME</th>
+                    <th>EVENT DESCRIPTION</th>
+                    <th>CONTACT EMAIL</th>
+                    <th>EVENT LOCATION</th>
+                    <th>ACTION</th>
 
                 </tr>
             </thead>
@@ -25,9 +26,8 @@
                 <td th:text = "${event.description}"></td>
                 <td th:text = "${event.contactEmail}"></td>
                 <td th:text = "${event.location}"></td>
-                <td></td>
                 <td>
-                    <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
+                    <a th:href="@{/events/edit/{id}(id=${event.id})}">EDIT</a>
                 </td>
             </tr>
 
