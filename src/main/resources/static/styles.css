@@ -42,7 +42,8 @@ h1 {
     cursor: pointer;
 }
 
-.checkbox {
-    margin: 10px;
+.form-control, .form-group {
+    margin: 3px;
+    padding: 10px;
     cursor: pointer;
 }

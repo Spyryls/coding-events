@@ -12,7 +12,7 @@
         <th:block th:each = "event : ${events}">
             <div class = "form group">
                 <label>
-                    <span th:text = "'ID: ' + ${event.id} + ' | ' + 'Organizer: ' + ${event.name} + ' | ' + ${event.description}"></span>
+                    <span th:text = "'Organizer: ' + ${event.name} + ' | ' + ${event.description}"></span>
                     <input type = "checkbox" name = "eventIds" th:value = "${event.id}" class = "form-control"><br><br>
                 </label>
             </div>

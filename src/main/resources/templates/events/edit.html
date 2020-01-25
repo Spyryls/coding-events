@@ -36,7 +36,18 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Submit Changes" class="btn-success"/>
+        <label>Type of Event
+            <select th:field="${event.type}" >
+                <option th:each="type : ${types}"
+                        th:value="${type}"
+                        th:text="${type.displayName}"
+                ></option>
+            </select>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Submit Changes" class="btn btn-success"/>
     </div>
 
 </form>
