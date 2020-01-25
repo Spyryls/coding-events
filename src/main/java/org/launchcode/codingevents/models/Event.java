@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Event {
 
     private int id;
-    private static int nextId = 1;
+    private static int nextId = 100;
 
     @NotBlank(message = "This field may not be blank.")
     @Size(min = 3, max = 50, message =  "Your name must be between 3 and 50 characters.")
