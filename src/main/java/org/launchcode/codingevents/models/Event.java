@@ -25,7 +25,7 @@ public class Event {
 
     private EventType type;
 
-    public Event(String name, String description, String contactEmail, String location, EventType type,) {
+    public Event(String name, String description, String contactEmail, String location, EventType type) {
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;

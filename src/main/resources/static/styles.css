@@ -24,3 +24,8 @@ label {
 tr {
     color: #818181;
 }
+
+h1 {
+    color: white;
+    margin: 10px;
+}

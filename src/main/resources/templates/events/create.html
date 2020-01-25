@@ -38,10 +38,13 @@
 
         <div class="form-group">
             <label>Type of Event
-                <select th:field="${event.type}" ></select>
+                <select th:field="${event.type}" >
                     <option th:each="type : ${types}"
+                            th:value="${type}"
+                            th:text="${type.displayName}"
+                    ></option>
+                </select>
             </label>
-            <p class="error" th:errors="${event.eventType}"></p>
         </div>
 
         <div class="form-group">
