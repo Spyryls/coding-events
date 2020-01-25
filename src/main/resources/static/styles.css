@@ -29,3 +29,20 @@ h1 {
     color: white;
     margin: 10px;
 }
+
+.btn-success {
+    background-color: #656565;
+    border-color: #000ba7;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #656565;
+    border-color: #000ba7;
+    cursor: pointer;
+}
+
+.checkbox {
+    margin: 10px;
+    cursor: pointer;
+}
