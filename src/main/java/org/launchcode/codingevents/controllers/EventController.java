@@ -2,8 +2,10 @@ package org.launchcode.codingevents.controllers;
 
 import org.apache.tomcat.util.modeler.BaseAttributeFilter;
 import org.launchcode.codingevents.data.EventData;
+import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.models.EventType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -17,10 +19,15 @@ import java.util.List;
 @RequestMapping("events")
 public class EventController {
 
+    @Autowired
+    private EventRepository eventRepository;
+
+    // findAll, save, findById
+
     @GetMapping
     public String displayAllEvents(Model model) {
         model.addAttribute("title", "All Events");
-        model.addAttribute("events", EventData.getAll());
+        model.addAttribute("events", eventRepository.findAll());
         return "events/index";
     }
 
@@ -38,14 +45,14 @@ public class EventController {
             model.addAttribute("title", "All Events");
             return "events/create";
         }
-        EventData.add(newEvent);
+        eventRepository.save(newEvent);
         return"redirect:";
     }
 
     @GetMapping("delete")
     public String displayDeleteEventForm(Model model) {
         model.addAttribute("title", "Delete Event");
-        model.addAttribute("events", EventData.getAll());
+        model.addAttribute("events", eventRepository.findAll());
         return "events/delete";
     }
 
@@ -53,7 +60,7 @@ public class EventController {
     public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds) {
         if (eventIds != null) {
             for (int id : eventIds) {
-                EventData.remove(id);
+                eventRepository.deleteById(id);
             }
         }
         return "redirect:";
@@ -61,7 +68,7 @@ public class EventController {
 
     @GetMapping("edit/{eventId}")
     public String displayEditForm(Model model, @PathVariable int eventId) {
-        Event eventToEdit = EventData.getById(eventId);
+        Event eventToEdit = eventRepository.findById(eventId).get();
         model.addAttribute("title", "Edit Event: " + eventToEdit.getDescription());
         model.addAttribute(eventToEdit);
         model.addAttribute("types", EventType.values());
@@ -70,7 +77,7 @@ public class EventController {
 
     @PostMapping("edit")
     public String processEditForm(int eventId, String name, String description, String contactEmail, String location, EventType type) {
-        Event eventToEdit = EventData.getById(eventId);
+        Event eventToEdit = eventRepository.findById(eventId).get();
         eventToEdit.setName(name);
         eventToEdit.setDescription(description);
         eventToEdit.setContactEmail(contactEmail);
