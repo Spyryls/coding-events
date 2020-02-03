@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("events")
@@ -23,16 +23,27 @@ public class EventController {
     private EventCategoryRepository eventCategoryRepository;
 
     @GetMapping
-    public String displayAllEvents(Model model) {
-        model.addAttribute("title", "All Events");
-        model.addAttribute("events", eventRepository.findAll());
+    public String displayAllEvents(@RequestParam(required = false) Integer categoryId, Model model) {
+        if (categoryId == null) {
+            model.addAttribute("title", "All Events");
+            model.addAttribute("events", eventRepository.findAll());
+        } else {
+            Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
+            if (result.isEmpty()) {
+                model.addAttribute("title", "Invalid Category Id" + categoryId);
+            } else {
+                EventCategory category = result.get();
+                model.addAttribute("title", "Event in Category" + category.getName());
+                model.addAttribute("events", category.getEvents());
+            }
+        }
         return "events/index";
     }
 
     @GetMapping("create")
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title","Create Event");
-        model.addAttribute("event", new Event());
+        model.addAttribute(new Event());
         model.addAttribute("categories", eventCategoryRepository.findAll());
         return "events/create";
     }
@@ -40,7 +51,7 @@ public class EventController {
     @PostMapping("create")
     public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
         if(errors.hasErrors()) {
-            model.addAttribute("title", "All Events");
+            model.addAttribute("title", "Create Event");
             return "events/create";
         }
         eventRepository.save(newEvent);
@@ -50,7 +61,7 @@ public class EventController {
     @GetMapping("delete")
     public String displayDeleteEventForm(Model model) {
         model.addAttribute("title", "Delete Event");
-        model.addAttribute("events", eventRepository.findAll());
+        model.addAttribute(eventRepository.findAll());
         return "events/delete";
     }
 

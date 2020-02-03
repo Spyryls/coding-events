@@ -8,6 +8,20 @@
 
         <table class="table table-striped">
 
+            <thead>
+                <tr>
+                    <th>CATEGORY NAME</th>
+                </tr>
+            </thead>
+
+            <tr th:each="category : ${categories}">
+                <td><a th:text = "${category.name}" th:href="'events?categoryId=' + ${category.id}"></a></td>
+                <td><a th:href="@{/category/edit/{id}(id=${category.id})}">EDIT</a></td>
+            </tr>
+
         </table>
+
+    <p th:unless="${eventCategory} and ${eventCategory.size()}" style="color: grey;">No categories listed! Click 'Create Categories' to add a new category.</p>
+
 </body>
 </html>
