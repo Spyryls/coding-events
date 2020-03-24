@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 @Entity
 public class EventDetails extends AbstractEntity{
 
-
     @Size(max = 500, message = "Description has too many characters.")
     private String description;
 

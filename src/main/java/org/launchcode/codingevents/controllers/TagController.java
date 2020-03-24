@@ -1,10 +1,8 @@
 package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.TagRepository;
-import org.launchcode.codingevents.models.EventCategory;
 import org.launchcode.codingevents.models.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -20,7 +18,7 @@ import javax.validation.Valid;
 public class TagController {
 
     @Autowired
-    TagRepository tagRepository;
+    private TagRepository tagRepository;
 
     @GetMapping
     public String displayTags(Model model) {
@@ -35,7 +33,6 @@ public class TagController {
         model.addAttribute(new Tag());
         return "tags/create";
     }
-
 
     @PostMapping("create")
     public String processCreateTagForm(@ModelAttribute @Valid Tag tag, Errors errors, Model model) {
